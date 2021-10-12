@@ -1,3 +1,5 @@
+set -e
+
 curl -sL run.linkerd.io/install | sh 
 export PATH=$PATH:/home/runner/.linkerd2/bin
 linkerd version
