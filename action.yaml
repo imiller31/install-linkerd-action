@@ -14,17 +14,5 @@ runs:
   steps:
     - run: ${{ github.action_path }}/install-kubectl.sh
       shell: bash
-    - run: curl -sL run.linkerd.io/install | sh
-      shell: bash
-    - run: export PATH=$PATH:/home/runner/.linkerd2/bin
-      shell: bash
-    - run: linkerd version
-      shell: bash
-    - run: linkerd check --pre
-      shell: bash
-    - run: linkerd install | kubectl --kubeconfig ${{ inputs.KUBECONFIG}} apply -f -
-      shell: bash
-    - run: if [${{ inputs.INSTALL_VIZ }}] then linkerd viz install | kubectl --kubeconfig ${{ inputs.KUBECONFIG}} apply -f - fi
-      shell: bash
-    - run: linkerd check
+    - run: ${{ github.action_path }}/install-linkerd.sh
       shell: bash
