@@ -3,7 +3,7 @@ set -e
 curl -sL run.linkerd.io/install | sh 
 export PATH=$PATH:/home/runner/.linkerd2/bin
 linkerd version
-export LINKERD_PRECHECK=$(linkerd check --pre -o short)
+export LINKERD_PRECHECK=$(linkerd check --pre -o short 2>&1)
 
 if grep -q "linkerd upgrade" <<< "$LINKERD_PRECHECK"; then
     linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
