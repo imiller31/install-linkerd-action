@@ -1,5 +1,5 @@
 curl -sL run.linkerd.io/install | sudo bash    
-export PATH=$PATH:/home/runner/.linkerd2/bin
+export PATH=$PATH:/root/.linkerd2/bin
 linkerd version
 linkerd check --pre
 linkerd install | kubectl --kubeconfig $KUBECONFIG apply -f -
