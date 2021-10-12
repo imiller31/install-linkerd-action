@@ -22,7 +22,7 @@ runs:
       shell: bash
     - run: linkerd install | kubectl --kubeconfig ${{ inputs.KUBECONFIG}} apply -f -
       shell: bash
-    - run: linkerd viz install | kubectl --kubeconfig ${{ inputs.KUBECONFIG}} apply -f -
+    - run: if [${{ inputs.INSTALL_VIZ }}] then linkerd viz install | kubectl --kubeconfig ${{ inputs.KUBECONFIG}} apply -f - fi
       shell: bash
       if: ${{ inputs.INSTALL_VIZ }}
     - run: linkerd check
