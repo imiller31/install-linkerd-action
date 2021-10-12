@@ -1,0 +1,13 @@
+on: [push]
+
+jobs:
+  Install-Linkerd-Action:
+    runs-on: ubuntu-latest
+    name: installs-linkerd
+    steps:
+      - run: mkdir ~/.kube/ && echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
+        shell: bash
+      - uses: actions/checkout@v2
+      - id: bar
+        uses: imiller31/install-linkerd-action@v0.1
+

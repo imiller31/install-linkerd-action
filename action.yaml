@@ -1,0 +1,29 @@
+name: 'Install Linkerd'
+description: 'installs linkerd onto target cluster'
+inputs:
+  KUBECONFIG:
+    description: "path to kubeconfig"
+    required: false
+    default: "~/.kube/config"
+  INSTALL_VIZ:
+    description: "install viz or not"
+    required: false
+    default: true
+runs:
+  using: "composite"
+  steps:
+    - run: ${{ github.action_path }}/install-kubectl.sh
+      shell: bash
+    - run: curl -sL run.linkerd.io/install | sh
+      shell: bash
+    - run: linkerd version
+      shell: bash
+    - run: linkerd check --pre
+      shell: bash
+    - run: linkerd install | kubectl --kubeconfig ${{ inputs.KUBECONFIG}} apply -f -
+      shell: bash
+    - run: linkerd viz install | kubectl --kubeconfig ${{ inputs.KUBECONFIG}} apply -f -
+      shell: bash
+      is: ${{ inputs.INSTALL_VIZ }}
+    - run: linkerd check
+      shell: bash
