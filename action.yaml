@@ -16,6 +16,8 @@ runs:
       shell: bash
     - run: curl -sL run.linkerd.io/install | sh
       shell: bash
+    - run: export PATH=$PATH:/home/runner/.linkerd2/bin
+      shell: bash
     - run: linkerd version
       shell: bash
     - run: linkerd check --pre
