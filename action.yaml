@@ -24,6 +24,6 @@ runs:
       shell: bash
     - run: linkerd viz install | kubectl --kubeconfig ${{ inputs.KUBECONFIG}} apply -f -
       shell: bash
-      is: ${{ inputs.INSTALL_VIZ }}
+      if: ${{ inputs.INSTALL_VIZ }}
     - run: linkerd check
       shell: bash
