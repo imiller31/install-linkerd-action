@@ -5,9 +5,10 @@ jobs:
     runs-on: ubuntu-latest
     name: installs-linkerd
     steps:
-      - run: mkdir ~/.kube/ && echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
+      - run: mkdir /home/runner/.kube/ && echo "${{ secrets.KUBECONFIG }}" > /home/runner/.kube/config
         shell: bash
       - uses: actions/checkout@v2
-      - id: bar
-        uses: imiller31/install-linkerd-action@v0.1
+      - uses: imiller31/install-linkerd-action@v0.1
+        with:
+          KUBECONFIG: /home/runner/.kube/config
 
